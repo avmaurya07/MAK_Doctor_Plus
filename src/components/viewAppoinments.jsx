@@ -125,7 +125,7 @@ const ViewAppointments = () => {
   });
 
   const filteredAppointmentsByUserType = userData.userType === 'mak_doctor'
-    ? filteredAppointments.filter(appointment => appointment.collectedFee || appointment.exercise)
+    ? filteredAppointments.filter(appointment => appointment.feePaid || appointment.exercise)
     : filteredAppointments;
 
   const today = new Date().toISOString().split('T')[0];
@@ -157,7 +157,7 @@ const ViewAppointments = () => {
                   <p><strong>Doctor:</strong> {appointment.DoctorName}</p>
                   {(userData.userType === 'mak_doctor') ? (
                     <>
-                      <p><strong>Doctor Fee:</strong> {appointment.collectedFee ? 'Yes' : 'No'}</p>
+                      <p><strong>Doctor Fee:</strong> {appointment.feePaid ? 'Yes' : 'No'}</p>
                       <p><strong>Exercise Fee:</strong> {appointment.exercise ? 'Yes' : 'No'}</p>
                     </>
                   ) : (
