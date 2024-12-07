@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import config from "../config";
 import Switch from 'react-switch';
+import { useNavigate } from 'react-router-dom';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState('mak_doctor');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -24,7 +26,7 @@ const Users = () => {
 
   useEffect(() => {
     handleLogin();
-  }, [1]);
+  }, []);
 
   const handleDelete = async (userId) => {
     const confirmed = window.confirm('Are you sure you want to delete this user?');
@@ -49,7 +51,6 @@ const Users = () => {
   };
 
   const handleSwitchChange = async (userId, isActive) => {
-
     try {
       const response = await fetch(`${config.baseURL}user-lists/${userId}`, {
         method: 'PUT',
@@ -68,6 +69,13 @@ const Users = () => {
     } catch (error) {
       console.error('Error updating user:', error);
     }
+  };
+
+  const handleUserLogin = (user) => {
+    const currentUser = JSON.parse(localStorage.getItem('userData'));
+    localStorage.setItem('userData1', JSON.stringify(currentUser));
+    localStorage.setItem('userData', JSON.stringify(user));
+    navigate("/");
   };
 
   const filteredUsers = users.filter(user => user.userType === filter);
@@ -112,6 +120,12 @@ const Users = () => {
                 onClick={() => handleDelete(user.documentId)}
               >
                 Delete
+              </button>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                onClick={() => handleUserLogin(user)}
+              >
+                Login
               </button>
             </li>
           ))}

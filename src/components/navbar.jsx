@@ -16,8 +16,16 @@ const Navbar = () => {
   }, [1]);
 
   const handleLogout = () => {
-    localStorage.clear();
-    navigate('/login');
+    if (localStorage.getItem('userData1')) {
+      setUserData(localStorage.getItem('userData1'));
+      localStorage.setItem('userData', localStorage.getItem('userData1'));
+      localStorage.removeItem('userData1');
+      navigate('/');
+    }else{
+      localStorage.removeItem('userData');
+      navigate('/');
+    }
+    
   };
 
   const handleBack = () => {
