@@ -8,8 +8,12 @@ function BookAppointment() {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [appointmentDate, setAppointmentDate] = useState(() => {
-        const today = new Date();
-        return today.toISOString().split('T')[0];
+        return new Date().toLocaleDateString('en-IN', { 
+            timeZone: 'Asia/Kolkata', 
+            year: 'numeric', 
+            month: '2-digit', 
+            day: '2-digit' 
+          }).split('/').reverse().join('-')
     });
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState("");

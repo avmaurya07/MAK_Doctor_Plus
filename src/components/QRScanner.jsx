@@ -10,8 +10,12 @@ const QRScanner = () => {
   const [error, setError] = useState(null);
   const [appointment, setAppointment] = useState({});
   const [selectedDate, setSelectedDate] = useState(() => {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
+    return new Date().toLocaleDateString('en-IN', { 
+      timeZone: 'Asia/Kolkata', 
+      year: 'numeric', 
+      month: '2-digit', 
+      day: '2-digit' 
+    }).split('/').reverse().join('-')
   });
   const [isScanning, setIsScanning] = useState(true); // State to track if scanning should continue
 
@@ -81,7 +85,9 @@ const QRScanner = () => {
       }
     };
 
-    startScanner();
+    if (isScanning) {
+      startScanner();
+    }
 
     // Cleanup function to stop the video stream
     return () => {
@@ -89,7 +95,7 @@ const QRScanner = () => {
         streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
-  }, [isScanning]);
+  }, [1]);
 
   const handleRestartScanning = () => {
     setScanResult("");

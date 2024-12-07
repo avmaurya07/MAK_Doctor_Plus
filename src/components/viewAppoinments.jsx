@@ -7,8 +7,12 @@ const ViewAppointments = () => {
   const [userData, setUserData] = useState({});
   const [printData, setPrintData] = useState({});
   const [selectedDate, setSelectedDate] = useState(() => {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
+    return new Date().toLocaleDateString('en-IN', { 
+      timeZone: 'Asia/Kolkata', 
+      year: 'numeric', 
+      month: '2-digit', 
+      day: '2-digit' 
+    }).split('/').reverse().join('-')
   });
   const printRef = useRef(null);
 
@@ -128,7 +132,12 @@ const ViewAppointments = () => {
     ? filteredAppointments.filter(appointment => appointment.feePaid || appointment.exercise)
     : filteredAppointments;
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toLocaleDateString('en-IN', { 
+    timeZone: 'Asia/Kolkata', 
+    year: 'numeric', 
+    month: '2-digit', 
+    day: '2-digit' 
+  }).split('/').reverse().join('-')
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
