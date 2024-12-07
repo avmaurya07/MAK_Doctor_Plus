@@ -24,7 +24,7 @@ const Users = () => {
 
   useEffect(() => {
     handleLogin();
-  }, []);
+  }, [1]);
 
   const handleDelete = async (userId) => {
     const confirmed = window.confirm('Are you sure you want to delete this user?');

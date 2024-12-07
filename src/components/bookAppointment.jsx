@@ -45,7 +45,7 @@ function BookAppointment() {
                         Name: name,
                         phoneNumber,
                         dateOfAppoinment: appointmentDate,
-                        DoctorName: selectedDoctor.Name,
+                        DoctorName: selectedDoctor,
                         feePaid: collectedFee,
                         exercise
                     }
@@ -54,7 +54,7 @@ function BookAppointment() {
             const data = await response.json();
             if (data.data) {
                 alert('Appointment booked successfully');
-                navigate("/dashboard");
+                navigate("/view-appointments");
             } else {
                 alert('Booking Failed', 'Please check the details and try again.');
             }
@@ -75,7 +75,7 @@ function BookAppointment() {
             const data = await response.json();
             if (data) {
                 setDoctors(data.data);
-                setSelectedDoctor(data.data.length === 1 ? data.data[0].id : "");
+                setSelectedDoctor(data.data.length === 1 ? data.data[0].Name : "");
             }
         } catch (error) {
             console.error(error);
@@ -84,10 +84,11 @@ function BookAppointment() {
 
     useEffect(() => {
         getDoctors();
-    }, [doctors]);
+    }, [1]);
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+            
             <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-xs">
                 <h1 className="text-2xl font-bold mb-4 text-center">Book Appointment</h1>
                 <input
@@ -120,7 +121,7 @@ function BookAppointment() {
                 >
                     <option value="">Select Doctor</option>
                     {Array.isArray(doctors) && doctors.map((doctor) => (
-                        <option key={doctor.id} value={doctor.id}>
+                        <option key={doctor.id} value={doctor.Name}>
                             {doctor.Name}
                         </option>
                     ))}

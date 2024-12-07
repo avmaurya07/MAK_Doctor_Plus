@@ -12,7 +12,7 @@ const Dashboard = () => {
     } else {
       navigate('/login');
     }
-  }, [navigate]);
+  }, [1]);
 
   const handleChangePassword = () => {
     navigate('/change-password');

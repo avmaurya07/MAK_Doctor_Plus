@@ -20,7 +20,7 @@ function Register() {
         if (!userData || userData.userType !== 'admin') {
             navigate('/dashboard');
         }
-    }, [navigate]);
+    }, [1]);
 
     useEffect(() => {
         if (location.pathname === '/register-employee') {
@@ -29,7 +29,7 @@ function Register() {
         if (location.pathname === '/register-doctor') {
             setRole('mak_doctor');
         }
-    }, [location.pathname]);
+    }, [1]);
 
     const handleRegister = async () => {
         if (!name || !userId || !role) {

@@ -14,7 +14,7 @@ function Login() {
         if (storedUserData) {
             navigate("/dashboard");
         }
-    }, [navigate]);
+    }, [1]);
 
     const handleLogin = async () => {
         try {

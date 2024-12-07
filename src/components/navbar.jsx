@@ -13,7 +13,7 @@ const Navbar = () => {
     } else {
       navigate('/login');
     }
-  }, [navigate]);
+  }, [1]);
 
   const handleLogout = () => {
     localStorage.clear();
