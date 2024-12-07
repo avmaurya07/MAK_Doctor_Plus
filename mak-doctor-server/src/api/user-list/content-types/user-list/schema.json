@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_lists",
+  "info": {
+    "singularName": "user-list",
+    "pluralName": "user-lists",
+    "displayName": "UserList",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "userType": {
+      "type": "string"
+    },
+    "isTempPassword": {
+      "type": "boolean",
+      "default": true
+    },
+    "userId": {
+      "type": "uid",
+      "default": "0",
+      "required": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": false
+    },
+    "mak": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::mak.mak"
+    },
+    "password": {
+      "type": "string",
+      "default": "1234",
+      "required": true
+    }
+  }
+}
