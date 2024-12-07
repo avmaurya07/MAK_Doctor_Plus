@@ -112,7 +112,7 @@ const ViewAppointments = () => {
       });
       setTimeout(() => {
         printWindow.close();
-      }, 200);
+      }, 1000);
     } catch (error) {
       console.error('Error saving appointment before printing:', error);
     }
@@ -279,7 +279,7 @@ const ViewAppointments = () => {
             <p style={{ margin: '40px 0 0', fontSize: '14px' }}>__________________________</p>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '14px', margin: '0 0 10px' }}><strong>QR Code</strong></p>
+            <p style={{ fontSize: '14px', margin: '0 0 10px' }}></p>
             <div style={{ height: '100px', width: '100px' }}>
               <img 
                 src={`https://api.qrserver.com/v1/create-qr-code/?data=${printData.documentId}&size=100x100`} 

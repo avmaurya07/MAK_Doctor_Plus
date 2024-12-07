@@ -41,6 +41,10 @@ const Dashboard = () => {
     navigate('/view-appointments');
   };
 
+  const handleScanQR = () => {
+    navigate('/QRScanner');
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-xs">
@@ -88,6 +92,17 @@ const Dashboard = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
           </li></>
+          )}
+          {(userData.userType === 'mak_doctor') && (
+            <li 
+              onClick={handleScanQR} 
+              className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
+            >
+              Scan QR
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </li>
           )}
           <li 
             onClick={handleViewAppointments} 

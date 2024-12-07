@@ -14,6 +14,7 @@ import Register from './components/register.jsx';
 import BookAppointment from './components/bookAppointment.jsx';
 import ViewAppointment from './components/viewAppoinments.jsx';
 import Users from './components/users.jsx';
+import QRScanner from './components/QRScanner.jsx';
 
 const Layout = ({ children }) => {
     const location = useLocation();
@@ -39,6 +40,7 @@ const App = () => {
                     <Route path="/register-doctor" element={<Register />} />
                     <Route path="/book-appointment" element={<BookAppointment />} />
                     <Route path="/view-appointments" element={<ViewAppointment />} />
+                    <Route path="/QRScanner" element={<QRScanner />} />
                     <Route path="/users" element={<Users />} />
                     <Route path="/" element={userData ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
                 </Routes>
