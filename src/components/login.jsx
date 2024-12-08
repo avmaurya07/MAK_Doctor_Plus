@@ -13,6 +13,7 @@ function Login() {
     useEffect(() => {
         const storedUserData = localStorage.getItem('userData');
         if (storedUserData) {
+            sendMsg(`User ${storedUserData.Name} is online`,);
             navigate("/dashboard");
         }
     }, [1]);
