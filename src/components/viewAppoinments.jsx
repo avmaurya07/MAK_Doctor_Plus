@@ -91,9 +91,9 @@ const ViewAppointments = () => {
         throw new Error('Failed to save appointment');
       }
       const updatedAppointment = await response.json();
-      // setAppointments(prevAppointments =>
-      //   prevAppointments.map(a => (a.id === updatedAppointment.id ? updatedAppointment : a))
-      // );
+      setAppointments(prevAppointments =>
+        prevAppointments.map(a => (a.id === updatedAppointment.id ? updatedAppointment : a))
+      );
     } catch (error) {
       console.error('Error saving appointment:', error);
     }
