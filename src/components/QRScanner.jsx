@@ -63,7 +63,7 @@ const QRScanner = () => {
           if (!updateResponse.ok) {
             throw new Error("Failed to update appointment");
           }else{
-            sendMsg(`Doctor ${doctorName} has completed the appoinment with ${data.data[0].name}`);
+            sendMsg(`Doctor ${doctorName} has completed the appoinment with ${data.data[0].Name}`);
           }
         }
       } else {
