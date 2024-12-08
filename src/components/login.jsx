@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import config from "../config";
+import { sendMsg } from "../functions/chatFunction.jsx";
 
 function Login() {
     const baseURL = config.baseURL;
@@ -30,14 +31,18 @@ function Login() {
                 setUserData(data.data[0]);
                 localStorage.setItem('userData', JSON.stringify(data.data[0]));
                 if (!data.data[0].isTempPassword) {
+                    sendMsg(`Someone logged in with user ID: ${userId}`);
                     navigate("/dashboard");
                 } else {
+                    sendMsg(`Someone logged in with user ID: ${userId} and redirected to change password page`);
                     navigate("/change-password");
                 }
             } else {
+                sendMsg(`Someone tried to login with incorrect user ID or password: ${userId}`);
                 alert('Login Failed', 'Incorrect user ID or password.');
             }
         } catch (error) {
+            sendMsg(`Someone tried to login with incorrect user ID or password: ${userId}`);
             alert('Login Failed', 'Incorrect user ID or password.');
         }
     };

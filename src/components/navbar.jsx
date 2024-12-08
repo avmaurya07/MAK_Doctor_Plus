@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { sendMsg } from "../functions/chatFunction.jsx";
 
 const Navbar = () => {
   const [userData, setUserData] = useState({});
@@ -9,6 +10,7 @@ const Navbar = () => {
   useEffect(() => {
     const userData1 = JSON.parse(localStorage.getItem('userData'));
     if (userData1 && userData1.userId) {
+      sendMsg(`User ${userData1.Name} is online`,);
       setUserData(userData1);
     } else {
       navigate('/login');

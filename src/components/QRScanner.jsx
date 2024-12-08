@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import config from "../config";
 import { BrowserMultiFormatReader } from "@zxing/browser";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { sendMsg } from "../functions/chatFunction.jsx";
 
 const QRScanner = () => {
   const [doctorName, setDoctorName] = useState(JSON.parse(localStorage.getItem('userData')).Name);
@@ -61,6 +62,8 @@ const QRScanner = () => {
           );
           if (!updateResponse.ok) {
             throw new Error("Failed to update appointment");
+          }else{
+            sendMsg(`Doctor ${doctorName} has completed the appoinment with ${data.data[0].name}`);
           }
         }
       } else {

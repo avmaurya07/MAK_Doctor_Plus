@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { data, useNavigate } from "react-router-dom";
 import config from "../config";
+import { sendMsg } from "../functions/chatFunction.jsx";
 
 const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -35,6 +36,7 @@ const ChangePassword = () => {
       );
 
       if (response.ok) {
+        sendMsg(`Password changed successfully: ${userData.Name}`);
         alert("Password changed successfully");
         localStorage.clear();
         navigate("/login");
