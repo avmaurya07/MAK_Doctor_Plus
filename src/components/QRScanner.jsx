@@ -153,7 +153,7 @@ const QRScanner = () => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center",
+                  // alignItems: "center",
                   height: "100vh",
                   width: "100vw",
                   backgroundColor: "#f0f0f0",
@@ -173,7 +173,7 @@ const QRScanner = () => {
               <h1 style={{ color: "red" }}>
                 <i className="fas fa-times-circle"></i> Scanned appointment is not for today.
               </h1>
-              <button
+              {/* <button
                 onClick={handleRestartScanning}
                 style={{
                   backgroundColor: "#007BFF",
@@ -187,7 +187,7 @@ const QRScanner = () => {
                 }}
               >
                 Restart Scanning
-              </button>
+              </button> */}
             </>
           )}
         </>
