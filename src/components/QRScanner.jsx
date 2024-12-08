@@ -105,7 +105,7 @@ const QRScanner = () => {
                 if (scan2) {
                   scan2 = false;
                   setTimeout(() => {
-                    setError("Referesh the page and try again");
+                    setError("Scan again");
                     console.log(streamRef.current);
                     streamRef.current
                       .getTracks()
@@ -173,7 +173,6 @@ const QRScanner = () => {
               <h1 style={{ color: "red" }}>
                 <i className="fas fa-times-circle"></i> Scanned appointment is not for today.
               </h1>
-              <p>{selectedDate}</p>
               <button
                 onClick={handleRestartScanning}
                 style={{
@@ -193,8 +192,8 @@ const QRScanner = () => {
           )}
         </>
       ) : error ? (
-        <p style={{ color: "red" }}>
-          <i className="fas fa-times-circle"></i> {error}
+        <p style={{ color: "red", fontSize: "3rem"  }}>
+          <i className="fas fa-times-circle" style={{ fontSize: "3rem" }}></i> {error}
         </p>
       ) : (
         <video ref={videoRef} style={{ width: "100%", maxWidth: "500px" }} />
