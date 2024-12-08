@@ -164,14 +164,14 @@ const QRScanner = () => {
                 </h1>
               </div>
             ) : (
-              <h1 style={{ color: "red" }}>
-                <i className="fas fa-times-circle"></i> Scanned appointment belongs to other Doctor.
+              <h1 style={{ color: "red", fontSize: "3rem" }}>
+                <i className="fas fa-times-circle" style={{ fontSize: "3rem" }}></i> Scanned appointment belongs to other Doctor.
               </h1>
             )
           ) : (
             <>
-              <h1 style={{ color: "red" }}>
-                <i className="fas fa-times-circle"></i> Scanned appointment is not for today.
+              <h1 style={{ color: "red", fontSize: "3rem" }}>
+                <i className="fas fa-times-circle" style={{ fontSize: "3rem" }}></i> Scanned appointment is not for today.
               </h1>
               {/* <button
                 onClick={handleRestartScanning}
