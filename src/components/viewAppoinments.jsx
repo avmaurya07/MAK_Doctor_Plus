@@ -42,7 +42,7 @@ const ViewAppointments = () => {
     }
   }, [1]);
 
-  const handleSwitchChange = (id, field, value) => {
+  const handleSwitchChange = (documentId, field, value) => {
     setAppointments(prevAppointments =>
       prevAppointments.map(appointment =>
         appointment.documentId === documentId ? { ...appointment, [field]: value } : appointment
