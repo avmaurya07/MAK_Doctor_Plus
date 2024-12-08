@@ -18,6 +18,7 @@ const Users = () => {
         },
       });
       const data = await response.json();
+      
       setUsers(data.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -42,7 +43,7 @@ const Users = () => {
       if (!response.ok) {
         throw new Error('Failed to delete user');
       }
-      setUsers(users.filter(user => user.id !== userId));
+      // setUsers(users.filter(user => user.id !== userId));
       alert('User deleted successfully!');
       handleLogin();
     } catch (error) {

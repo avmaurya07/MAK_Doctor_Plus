@@ -20,7 +20,7 @@ const ViewAppointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch(`${config.baseURL}patients?filters[dateOfAppoinment][$eq]=${selectedDate}`, {
+        const response = await fetch(`${config.baseURL}patients?dateOfAppoinment=${selectedDate}`, {
           headers: {
             'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
           }
@@ -66,9 +66,9 @@ const ViewAppointments = () => {
         throw new Error('Failed to save appointment');
       }
       const updatedAppointment = await response.json();
-      setAppointments(prevAppointments =>
-        prevAppointments.map(a => (a.id === updatedAppointment.id ? updatedAppointment : a))
-      );
+      // setAppointments(prevAppointments =>
+      //   prevAppointments.map(a => (a.id === updatedAppointment.id ? updatedAppointment : a))
+      // );
       alert('Appointment saved successfully!');
     } catch (error) {
       console.error('Error saving appointment:', error);
@@ -91,9 +91,9 @@ const ViewAppointments = () => {
         throw new Error('Failed to save appointment');
       }
       const updatedAppointment = await response.json();
-      setAppointments(prevAppointments =>
-        prevAppointments.map(a => (a.id === updatedAppointment.id ? updatedAppointment : a))
-      );
+      // setAppointments(prevAppointments =>
+      //   prevAppointments.map(a => (a.id === updatedAppointment.id ? updatedAppointment : a))
+      // );
     } catch (error) {
       console.error('Error saving appointment:', error);
     }
@@ -154,7 +154,7 @@ const handleDateChange = (e) => {
   setIsAttended(false);
   const fetchAppointments = async () => {
     try {
-      const response = await fetch(`${config.baseURL}patients?filters[dateOfAppoinment][$eq]=${e.target.value}`, {
+      const response = await fetch(`${config.baseURL}patients?dateOfAppoinment=${e.target.value}`, {
         headers: {
           'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
         }

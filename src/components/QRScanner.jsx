@@ -28,7 +28,7 @@ const QRScanner = () => {
   const handleSave = async (documentId) => {
     try {
       const response = await fetch(
-        `${config.baseURL}patients?filters[documentId][$eq]=${documentId}`,
+        `${config.baseURL}patients?documentId=${documentId}`,
         {
           method: "GET",
           headers: {

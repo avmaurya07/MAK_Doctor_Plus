@@ -83,7 +83,7 @@ function BookAppointment() {
 
     const getDoctors = async () => {
         try {
-            const response = await fetch(`${baseURL}user-lists?filters[userType][$eq]=mak_doctor&filters[isActive][$eq]=true`, {
+            const response = await fetch(`${baseURL}user-lists?userType=mak_doctor&isActive=true`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

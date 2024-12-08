@@ -19,7 +19,7 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch( `${baseURL}user-lists?filters[userId][$eq]=${userId}&filters[password][$eq]=${password}`, {
+            const response = await fetch( `${baseURL}user-lists?userId=${userId}&password=${password}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
