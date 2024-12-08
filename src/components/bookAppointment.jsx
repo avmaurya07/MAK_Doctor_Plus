@@ -15,6 +15,8 @@ function BookAppointment() {
             day: '2-digit' 
           }).split('/').reverse().join('-')
     });
+    const [age, setAge] = useState('');
+    const [gender, setGender] = useState('');
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState("");
     const [collectedFee, setCollectedFee] = useState(false);
@@ -29,6 +31,16 @@ function BookAppointment() {
 
         if (!phoneNumber) {
             alert('Phone number is required');
+            return;
+        }
+
+        if (!age) {
+            alert('Age is required');
+            return;
+        }
+
+        if (!gender) {
+            alert('Gender is required');
             return;
         }
 
@@ -48,6 +60,8 @@ function BookAppointment() {
                     data: {
                         Name: name,
                         phoneNumber,
+                        age,
+                        gender,
                         dateOfAppoinment: appointmentDate,
                         DoctorName: selectedDoctor,
                         feePaid: collectedFee,
@@ -111,6 +125,24 @@ function BookAppointment() {
                     required
                 />
                 <input
+                    type="number"
+                    placeholder="Age"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    className="w-full p-2 mb-4 border border-gray-300 rounded"
+                    required
+                />
+                <select
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                    className="w-full p-2 mb-4 border border-gray-300 rounded"
+                    required
+                >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <input
                     type="date"
                     placeholder="Appointment Date"
                     value={appointmentDate}
@@ -142,7 +174,7 @@ function BookAppointment() {
                         height={20}
                         width={50}
                     />
-                    <label className="ml-2">Doctor Fee</label>
+                    <label className="ml-2">Doctor Fee (&#8377;200)</label>
                 </div>
                 <div className="flex items-center mb-4">
                     <Switch
@@ -150,13 +182,14 @@ function BookAppointment() {
                         checked={exercise}
                         onColor="#00FF00"
                         offColor="#FF0000"
+                        disabled={true}
                         uncheckedIcon={false}
                         checkedIcon={false}
                         handleDiameter={28}
                         height={20}
                         width={50}
                     />
-                    <label className="ml-2">Exercise Fee</label>
+                    <label className="ml-2">Exercise Fee (&#8377;100)</label>
                 </div>
                 <button
                     onClick={handleBookAppointment}
