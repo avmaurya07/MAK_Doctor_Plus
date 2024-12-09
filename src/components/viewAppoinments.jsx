@@ -23,7 +23,10 @@ const ViewAppointments = () => {
         const response = await fetch(`${config.baseURL}patients?dateOfAppoinment=${selectedDate}`, {
           headers: {
             'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
-          }
+          },
+          body: JSON.stringify({data:{mak:userData.mak,
+            date:selectedDate,
+          }})
         });
         const data = await response.json();
         setAppointments(data.data);
