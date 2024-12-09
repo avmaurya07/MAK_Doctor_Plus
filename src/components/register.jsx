@@ -9,10 +9,12 @@ function Register() {
     const [name, setName] = useState('');
     const [userId, setUserId] = useState('');
     const [role, setRole] = useState('mak_doctor');
+    const [mak, setMak] = useState(300069);
     const [newUser, setNewUser] = useState({
         name: '',
         userId: '',
-        role: ''
+        role: '',
+        mak: 300069
     });
 
     useEffect(() => {
@@ -40,14 +42,16 @@ function Register() {
             setNewUser({
                 name: name,
                 userId: userId,
-                role: "mak_employee"
+                role: "mak_employee",
+                mak: 300069
             })
         }
         if (role === 'Doctor'){
             setNewUser({
                 name: name,
                 userId: userId,
-                role: "mak_doctor"
+                role: "mak_doctor",
+                mak: 300069
             })
         }
         try {
@@ -62,6 +66,7 @@ function Register() {
                    Name: name,
                    userId: userId, 
                    userType:role,
+                   mak:mak,
                    isActive:false,
                 }
                 })
@@ -96,6 +101,14 @@ function Register() {
                     value={userId}
                     onChange={(e) => setUserId(e.target.value)}
                     className="w-full p-2 mb-4 border border-gray-300 rounded"
+                />
+                <input
+                    type="number"
+                    placeholder="MAK Code"
+                    value={mak}
+                    onChange={(e) => setMak(e.target.value)}
+                    className="w-full p-2 mb-4 border border-gray-300 rounded"
+                    disabled
                 />
                 <select
                     value={role}

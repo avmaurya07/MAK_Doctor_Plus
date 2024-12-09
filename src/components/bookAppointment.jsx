@@ -111,11 +111,13 @@ function BookAppointment() {
             <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-xs">
                 <h1 className="text-2xl font-bold mb-4 text-center">Book Appointment</h1>
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Phone Number"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     className="w-full p-2 mb-4 border border-gray-300 rounded"
+                    maxLength="10"
+                    required
                 />
                 <input
                     type="text"
@@ -132,6 +134,7 @@ function BookAppointment() {
                     onChange={(e) => setAge(e.target.value)}
                     className="w-full p-2 mb-4 border border-gray-300 rounded"
                     required
+                    maxLength="2"
                 />
                 <select
                     value={gender}
@@ -139,7 +142,6 @@ function BookAppointment() {
                     className="w-full p-2 mb-4 border border-gray-300 rounded"
                     required
                 >
-                    <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
