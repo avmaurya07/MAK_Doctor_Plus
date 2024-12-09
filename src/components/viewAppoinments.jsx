@@ -4,7 +4,7 @@ import Switch from 'react-switch';
 
 const ViewAppointments = () => {
   const [appointments, setAppointments] = useState([]);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')) || {});
   const [printData, setPrintData] = useState({});
   const [selectedDate, setSelectedDate] = useState(() => {
     return new Date().toLocaleDateString('en-IN', { 
@@ -20,13 +20,10 @@ const ViewAppointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch(`${config.baseURL}patients?dateOfAppoinment=${selectedDate}`, {
+        const response = await fetch(`${config.baseURL}patients/${userData.mak}a${selectedDate}?dateOfAppoinment=${selectedDate}`, {
           headers: {
             'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
           },
-          body: JSON.stringify({data:{mak:userData.mak,
-            date:selectedDate,
-          }})
         });
         const data = await response.json();
         setAppointments(data.data);
@@ -157,7 +154,7 @@ const handleDateChange = (e) => {
   setIsAttended(false);
   const fetchAppointments = async () => {
     try {
-      const response = await fetch(`${config.baseURL}patients?dateOfAppoinment=${e.target.value}`, {
+      const response = await fetch(`${config.baseURL}patients/${userData.mak}a${selectedDate}?dateOfAppoinment=${e.target.value}`, {
         headers: {
           'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
         }

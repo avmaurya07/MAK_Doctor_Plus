@@ -63,6 +63,7 @@ function BookAppointment() {
                         age,
                         gender,
                         dateOfAppoinment: appointmentDate,
+                        mak: JSON.parse(localStorage.getItem('userData')).mak,
                         DoctorName: selectedDoctor,
                         feePaid: collectedFee,
                         exercise
