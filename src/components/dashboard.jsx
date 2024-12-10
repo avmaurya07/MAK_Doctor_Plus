@@ -49,7 +49,9 @@ const Dashboard = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-xs">
         <h1 className="text-2xl font-bold mb-4 text-center">
-          {userData.userType === 'mak_doctor' ? 'Doctor' : userData.userType === 'admin' ? 'Admin' : userData.userType === 'mak_employee' ? 'Employee' : ''} Dashboard
+          {userData.userType === 'mak_doctor' ? 'Doctor' : 
+           userData.userType === 'admin' ? 'Admin' : 
+           userData.userType === 'mak_employee' ? (userData.isMakOwner ? "MAK's" : 'Employee') : ''} Dashboard
         </h1>
         <ul className="space-y-4">
           {(userData.userType === 'admin') && (<>
