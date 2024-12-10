@@ -129,7 +129,7 @@ function Register() {
         {role === "mak_employee" && (
           <div className="flex items-center mb-4">
             <Switch
-              onChange={(e) => setIsMakOwner(e.target.checked)}
+              onChange={()=>setIsMakOwner(!isMakOwner)}
               checked={isMakOwner}
               onColor="#00FF00"
               offColor="#FF0000"
@@ -139,7 +139,7 @@ function Register() {
               height={20}
               width={50}
             />
-            <label className="ml-2">Is MAK Owner(&#8377;200)</label>
+            <label className="ml-2">Is MAK Owner</label>
           </div>
         )}
         <button
