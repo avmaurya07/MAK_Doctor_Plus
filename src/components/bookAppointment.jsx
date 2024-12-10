@@ -16,7 +16,7 @@ function BookAppointment() {
           }).split('/').reverse().join('-')
     });
     const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
+    const [gender, setGender] = useState('Male');
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState("");
     const [collectedFee, setCollectedFee] = useState(false);
@@ -116,7 +116,8 @@ function BookAppointment() {
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     className="w-full p-2 mb-4 border border-gray-300 rounded"
-                    maxLength="10"
+                    max="9999999999"
+                    min="6000000000"
                     required
                 />
                 <input
@@ -134,7 +135,8 @@ function BookAppointment() {
                     onChange={(e) => setAge(e.target.value)}
                     className="w-full p-2 mb-4 border border-gray-300 rounded"
                     required
-                    maxLength="2"
+                    max="99"
+                    min="1"
                 />
                 <select
                     value={gender}
