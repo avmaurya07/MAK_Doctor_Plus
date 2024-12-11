@@ -26,8 +26,7 @@ const Users = () => {
   }, []);
 
 const handleMakeCall = (user) => {
-  const confirmed = window.confirm(`Do you want to make a call to ${user.Name}?`);
-  if (confirmed) {
+  if (true) {
     window.location.href = `tel:${user.Mobile}`;
   }
 
@@ -44,7 +43,7 @@ const handleMakeCall = (user) => {
               <p><strong>Name:</strong> {user.Name}</p>
               <p><strong>Mobile:</strong> {user.Mobile}</p>
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2"
                 onClick={() => handleMakeCall(user)}
               >
                 Make call
