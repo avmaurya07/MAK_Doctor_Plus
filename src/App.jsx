@@ -15,7 +15,7 @@ import BookAppointment from './components/bookAppointment.jsx';
 import ViewAppointment from './components/viewAppoinments.jsx';
 import Users from './components/users.jsx';
 import QRScanner from './components/QRScanner.jsx';
-import BulkWhatsAppSender from './components/BulkWhatsAppSender.jsx';
+import PhoneCall from './components/phoneCall.jsx';
 
 const Layout = ({ children }) => {
     const location = useLocation();
@@ -35,7 +35,7 @@ const App = () => {
             <Layout>
                 <Routes>
                     <Route path="/login" element={<Login />} />
-                    <Route path="/whatsapp" element={<BulkWhatsAppSender />} />
+                    <Route path='/phoneCall' element={<PhoneCall />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/change-password" element={<ChangePassword />} />
                     <Route path="/register-employee" element={<Register />} />
