@@ -38,15 +38,15 @@ const PhoneCall = () => {
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
         <h1 className="text-2xl font-bold mb-4 text-center">Today's Task</h1>
         <ul>
-          {users.map((user) => (
+          {users.map((user,index) => (
             <li
-          key={user.Sno}
+          key={index}
           className="mb-4 p-6 border border-gray-200 rounded-xl shadow-md bg-white"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between">
             <div className="flex-1 mb-4 sm:mb-0">
               <p className="text-base sm:text-lg font-semibold mb-2">
-                <strong>S.No:</strong> {user.Sno}
+                <strong>S.No:</strong> {index+1}
               </p>
               <p className="text-base sm:text-lg font-semibold mb-2">
                 <strong>Name:</strong> {user.Name}
