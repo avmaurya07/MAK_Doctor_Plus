@@ -308,8 +308,8 @@ const handleDateChange = (e) => {
         {/* Patient Info Section */}
         <div style={{ borderTop: '2px solid #007540', marginTop: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', lineHeight: '0.3' }}>
-            <p><strong>Patient Name:</strong> {printData.Name}</p>
-            <p><strong>Phone Number:</strong> {printData.phoneNumber}</p>
+            <p><strong>Patient:</strong> {printData.Name}</p>
+            <p><strong>Phone No:</strong> {printData.phoneNumber}</p>
             <p><strong>Date:</strong> {printData.dateOfAppoinment}</p>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', lineHeight: '0.3' }}>

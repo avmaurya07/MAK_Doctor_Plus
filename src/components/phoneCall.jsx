@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import config from "../config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { sendMsg } from "../functions/chatFunction.jsx";
 
 const PhoneCall = () => {
   const [users, setUsers] = useState([]);
@@ -29,6 +30,7 @@ const PhoneCall = () => {
 
   const handleMakeCall = (user) => {
     if (true) {
+      sendMsg(`${JSON.parse(localStorage.getItem('userData')).Name} made a call to ${user.Name} on ${user.Mobile}`);
       window.location.href = `tel:${user.Mobile}`;
     }
   };
