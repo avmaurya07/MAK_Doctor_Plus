@@ -209,7 +209,7 @@ const handleDateChange = (e) => {
                   <p><strong>Phone Number:</strong> {appointment.phoneNumber}</p>
                   <p><strong>Appointment Date:</strong> {(appointment.dateOfAppoinment.split('-').reverse().join('/'))}</p>
                   <p><strong>Doctor:</strong> {appointment.DoctorName}</p>
-                  {(userData.userType === 'mak_doctor') ? (
+                  {((userData.userType === 'mak_doctor') || (userData.userId === '300069-gullan')) ? (
                     <>
                       <p><strong>Doctor Fee:</strong> {appointment.feePaid ? 'Yes' : 'No'}</p>
                       <p><strong>Exercise Fee:</strong> {appointment.exercise ? 'Yes' : 'No'}</p>
