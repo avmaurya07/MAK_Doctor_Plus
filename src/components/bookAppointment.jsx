@@ -178,7 +178,7 @@ function BookAppointment() {
                         handleDiameter={28}
                         height={20}
                         width={50}
-                        disabled={JSON.parse((localStorage.getItem('userData')).userId==="300069-gullan")}
+                        disabled={(JSON.parse(localStorage.getItem('userData')).userId==="300069-gullan")}
                     />
                     <label className="ml-2">Doctor Fee (&#8377;200)</label>
                 </div>
