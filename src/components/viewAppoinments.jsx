@@ -271,19 +271,21 @@ const handleDateChange = (e) => {
         )}
       </div>
       <div 
-        ref={printRef} 
-        hidden 
-        className="prescription-template" 
-        style={{ 
-          fontFamily: 'Arial, sans-serif', 
-          padding: '20px', 
-          border: '1px solid #000', 
-          width: '600px', 
-          height: '800px', 
-          position: 'relative', 
-          boxSizing: 'border-box' 
-        }}
-      >
+              ref={printRef} 
+              hidden 
+              className="prescription-template" 
+              style={{ 
+                fontFamily: 'Arial, sans-serif', 
+                padding: '20px', 
+                border: '1px solid #000', 
+                width: '600px', 
+                height: '800px', 
+                position: 'relative', 
+                boxSizing: 'border-box',
+                transform: 'scale(1.1)', // Added this line
+                transformOrigin: 'top left' // Added this line to ensure scaling starts from the top left corner
+              }}
+            >
         {/* Header Section */}
         <div style={{ position: 'relative', marginBottom: '20px' }}>
           <img 
