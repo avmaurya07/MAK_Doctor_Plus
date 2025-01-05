@@ -166,13 +166,13 @@ const EmergencyModal = ({ isModalOpen, closeModal }) => {
         {/* Patient Info Section */}
         <div style={{ borderTop: '2px solid #007540', marginTop: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', lineHeight: '0.3' }}>
-            <p style={{ fontSize: '1.5em' }}><strong>Patient:</strong> {emergencyData.Name}</p>
-            <p style={{ fontSize: '1.5em' }}><strong>Phone No:</strong> {emergencyData.phoneNumber}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Patient:</strong> {emergencyData.Name || "__________"}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Phone No:</strong> {emergencyData.phoneNumber || "__________"}</p>
                         <p style={{ fontSize: '1.5em' }}><strong>Date:</strong> {new Date().toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'Asia/Kolkata' })}</p>          </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', lineHeight: '0.3' }}>
-            <p style={{ fontSize: '1.5em' }}><strong>Doctor:</strong> {emergencyData.DoctorName}</p>
-            <p style={{ fontSize: '1.5em' }}><strong>Age:</strong> {emergencyData.age}</p>
-            <p style={{ fontSize: '1.5em' }}><strong>Gender:</strong> {emergencyData.gender}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Doctor:</strong> {emergencyData.DoctorName || "__________"}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Age:</strong> {emergencyData.age || "_____"}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Gender:</strong> {emergencyData.gender || "_____"}</p>
           </div>
         </div>
         {/* Prescription Section */}
