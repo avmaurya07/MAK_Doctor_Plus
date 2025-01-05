@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import config from "../config";
 import Switch from 'react-switch';
+import EmergencyModal from './EmergencyModal';
 
 const ViewAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')) || {});
   const [printData, setPrintData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(() => {
     return new Date().toLocaleDateString('en-IN', { 
       timeZone: 'Asia/Kolkata', 
@@ -181,6 +183,13 @@ const handleDateChange = (e) => {
             onChange={(e) => handleDateChange(e)}
             className="p-2 border border-gray-300 rounded"
           />
+                    <button 
+                      onClick={() => setIsModalOpen(true)} 
+                      className="bg-red-500 text-white font-bold py-2 px-4 rounded m-2 hover:bg-red-700"
+                    >
+                      Emergency Sewa
+                    </button>
+
           {(userData.userType === 'mak_doctor') && <div className="ml-4 flex items-center">
             <Switch
               onChange={setIsAttended}
@@ -375,6 +384,8 @@ const handleDateChange = (e) => {
                 }
               `}
             </style>
+            <EmergencyModal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
+
     </div>
   );
 };
