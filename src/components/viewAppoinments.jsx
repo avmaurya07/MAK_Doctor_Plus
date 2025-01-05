@@ -281,9 +281,7 @@ const handleDateChange = (e) => {
                 width: '600px', 
                 height: '800px', 
                 position: 'relative', 
-                boxSizing: 'border-box',
-                transform: 'scale(1.1)', // Added this line
-                transformOrigin: 'top left' // Added this line to ensure scaling starts from the top left corner
+                boxSizing: 'border-box'
               }}
             >
         {/* Header Section */}
@@ -291,18 +289,18 @@ const handleDateChange = (e) => {
           <img 
             src="https://imcbusiness.com/images/logo.png" 
             alt="Mega Ayurvedic Kendra Logo" 
-            style={{ position: 'absolute', top: '1px', left: '20px', height: '80px' }} 
+            style={{ position: 'absolute', top: '1px', left: '20px', height: '120px' }} 
           />
           <div style={{ textAlign: 'center', marginTop: '0px' }}>
-            <h1 style={{ margin: 0, fontSize: '24px', color: '#007540' }}>Mega Ayurvedic Kendra</h1>
-            <p style={{ margin: 0, fontSize: '14px' }}>Roadways to Bhawarnath Bypass Road, 500 mtr from Roadways,<br /> Azamgarh, Uttar Pradesh - 276001</p>
-            <p style={{ margin: 0, fontSize: '14px' }}>Phone: +91 9554242552 | Email: imc.azamgarh@gmail.com</p>
+            <h1 style={{ margin: 0, fontSize: '36px', color: '#007540' }}>Mega Ayurvedic Kendra</h1>
+            <p style={{ margin: 0, fontSize: '21px' }}>Roadways to Bhawarnath Bypass Road, 500 mtr from Roadways,<br /> Azamgarh, Uttar Pradesh - 276001</p>
+            <p style={{ margin: 0, fontSize: '21px' }}>Phone: +91 9554242552 | Email: imc.azamgarh@gmail.com</p>
           </div>
           <div style={{ position: 'absolute', top: '1px', right: '20px' }}>
             <img 
               src={`https://api.qrserver.com/v1/create-qr-code/?data=${printData.documentId}&size=100x100`} 
               alt="QR Code" 
-              style={{ height: '80px', width: '80px' }} 
+              style={{ height: '120px', width: '120px' }} 
             />
           </div>
         </div>
@@ -310,20 +308,19 @@ const handleDateChange = (e) => {
         {/* Patient Info Section */}
         <div style={{ borderTop: '2px solid #007540', marginTop: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', lineHeight: '0.3' }}>
-            <p><strong>Patient:</strong> {printData.Name}</p>
-            <p><strong>Phone No:</strong> {printData.phoneNumber}</p>
-            <p><strong>Date:</strong> {printData.dateOfAppoinment}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Patient:</strong> {printData.Name}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Phone No:</strong> {printData.phoneNumber}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Date:</strong> {printData.dateOfAppoinment}</p>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', lineHeight: '0.3' }}>
-            <p><strong>Doctor:</strong> {printData.DoctorName}</p>
-            <p><strong>Age:</strong> {printData.age}</p>
-            <p><strong>Gender:</strong> {printData.gender}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Doctor:</strong> {printData.DoctorName}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Age:</strong> {printData.age}</p>
+            <p style={{ fontSize: '1.5em' }}><strong>Gender:</strong> {printData.gender}</p>
           </div>
         </div>
-
         {/* Prescription Section */}
         <div style={{ borderTop: '2px solid #007540', marginTop: '10px', paddingTop: '10px' }}>
-          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Prescription:</h2>
+          <h2 style={{ fontSize: '27px', marginBottom: '10px' }}>Prescription:</h2>
         </div>
 
         {/* Footer Section */}
@@ -352,7 +349,7 @@ const handleDateChange = (e) => {
             bottom: '1px', 
             left: '20px', 
             right: '20px', 
-            fontSize: '12px', 
+            fontSize: '15px', // Increased from 12px to 18px
             textAlign: 'center', 
             color: '#777' 
           }}
@@ -363,21 +360,21 @@ const handleDateChange = (e) => {
 
       {/* Add this CSS */}
       <style>
-        {`
-          @media print {
-            @page {
-              margin: 5px 0;
-            }
-            body {
-              margin: 0;
-            }
-            .prescription-template {
-              margin: 0 auto; /* Center the template horizontally */
-              box-shadow: none; /* Remove any box shadows for printing */
-            }
-          }
-        `}
-      </style>
+              {`
+                @media print {
+                  @page {
+                    margin: 5px 0;
+                  }
+                  body {
+                    margin: 0mm; /* Add margin assuming no printer margin */
+                  }
+                  .prescription-template {
+                    margin: 0mm auto; /* Center the template horizontally with margin */
+                    box-shadow: none; /* Remove any box shadows for printing */
+                  }
+                }
+              `}
+            </style>
     </div>
   );
 };
