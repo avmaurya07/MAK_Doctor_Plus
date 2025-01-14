@@ -97,8 +97,8 @@ const EmergencyModal = ({ isModalOpen, closeModal }) => {
               className="block w-full border border-gray-300 rounded-md p-3 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
             </select>
           </div>
           <div>

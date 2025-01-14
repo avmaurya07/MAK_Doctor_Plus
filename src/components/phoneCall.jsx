@@ -51,7 +51,19 @@ const PhoneCall = () => {
                 <strong>S.No:</strong> {index+1}
               </p>
               <p className="text-base sm:text-lg font-semibold mb-2">
+                <strong>ID No:</strong> {user.IDNo}
+              </p>
+              <p className="text-base sm:text-lg font-semibold mb-2">
                 <strong>Name:</strong> {user.Name}
+              </p>
+              <p className="text-base sm:text-lg font-semibold mb-2">
+                <strong>City:</strong> {user.City}
+              </p>
+              <p className="text-base sm:text-lg font-semibold mb-2">
+                <strong>State:</strong> {user.State}
+              </p>
+              <p className="text-base sm:text-lg font-semibold mb-2">
+                <strong>Join Date:</strong> {user.JoinDate}
               </p>
               <p className="text-base sm:text-lg font-semibold mb-2">
                 <strong>Mobile:</strong> {user.Mobile}
