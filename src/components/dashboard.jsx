@@ -97,7 +97,7 @@ const Dashboard = () => {
             </>
           )}
           {(userData.userType === 'admin' || userData.userType==='mak_employee') && (<>
-           {userData.userId==='300069' && <li 
+           {(userData.userId==='300069' || userData.userId==='300069-gullan') && <li 
               onClick={handlephoneCall} 
               className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300 md:hidden"
             >
@@ -106,7 +106,7 @@ const Dashboard = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
               </svg>
             </li>}
-          <li 
+          {(userData.userId !== '300069-gullan') && <li 
             onClick={handleBookAppointment} 
             className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
           >
@@ -114,8 +114,8 @@ const Dashboard = () => {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
-          </li></>
-          )}
+          </li>}
+          </>)}
           {(userData.userType === 'mak_doctor') && (
             <li 
               onClick={handleScanQR} 
@@ -127,7 +127,7 @@ const Dashboard = () => {
               </svg>
             </li>
           )}
-          <li 
+          {(userData.userId !== '300069-gullan') && <li 
             onClick={handleViewAppointments} 
             className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
           >
@@ -135,8 +135,8 @@ const Dashboard = () => {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
-          </li>
-          <li 
+          </li>}
+          {(userData.userId==='300069' || userData.userId==='300069-gullan') && <li 
             onClick={handleChangePassword} 
             className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
           >
@@ -144,7 +144,7 @@ const Dashboard = () => {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
-          </li>
+          </li>}
         </ul>
       </div>
     </div>
