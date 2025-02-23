@@ -58,7 +58,7 @@ function BookAppointment() {
                 },
                 body: JSON.stringify({
                     data: {
-                        Name: name,
+                        Name: name.toUpperCase(),
                         phoneNumber,
                         age,
                         gender,
