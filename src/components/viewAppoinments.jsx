@@ -240,7 +240,7 @@ const handleDateChange = (e) => {
                         />
                         <label className="ml-2">Doctor Fee (&#8377;200)</label>
                       </div>
-                      <div className="flex items-center mb-4">
+                     {/* <div className="flex items-center mb-4">
                         <Switch
                           onChange={(checked) => handleSwitchChange(appointment.id, 'exercise', checked)}
                           checked={appointment.exercise}
@@ -255,7 +255,7 @@ const handleDateChange = (e) => {
                           // disabled={!isFutureOrToday}
                         />
                         <label className="ml-2">Exercise Fee (&#8377;100)</label>
-                      </div>
+                      </div>*/}
                       <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         onClick={() => handleSave(appointment)}
