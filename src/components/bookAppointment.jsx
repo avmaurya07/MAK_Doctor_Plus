@@ -182,7 +182,7 @@ function BookAppointment() {
                     />
                     <label className="ml-2">Doctor Fee (&#8377;200)</label>
                 </div>
-                <div className="flex items-center mb-4">
+                {/*<div className="flex items-center mb-4">
                     <Switch
                         onChange={setExercise}
                         checked={exercise}
@@ -196,7 +196,7 @@ function BookAppointment() {
                         width={50}
                     />
                     <label className="ml-2">Exercise Fee (&#8377;100)</label>
-                </div>
+                </div>*/}
                 <button
                     onClick={handleBookAppointment}
                     className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
