@@ -3,6 +3,7 @@ import config from "../config";
 
 const Payments = () => {
   const [payments, setPayments] = useState([]);
+  const [amount, setAmount] = useState("0.00");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -11,14 +12,14 @@ const Payments = () => {
     setError(null);
     try {
       const response = await fetch(`${config.baseURL}payment`, {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
-
       setPayments(data.data || []); // Ensure empty state is handled
+      setAmount(data.amount)
     } catch (err) {
       setError("Failed to fetch payments");
       console.error("Error fetching payments:", err);
@@ -34,7 +35,7 @@ const Payments = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
-        <h1 className="text-2xl font-bold mb-4 text-center">Payments</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">Payments (&#8377; {amount})</h1>
         {loading && <p className="text-center text-gray-500">Loading...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && !error && payments.length === 0 && (
