@@ -19,7 +19,7 @@ const Payments = () => {
       });
       const data = await response.json();
       setPayments(data.data || []); // Ensure empty state is handled
-      setAmount(data.amount)
+      setAmount(data.amount);
     } catch (err) {
       setError("Failed to fetch payments");
       console.error("Error fetching payments:", err);
@@ -35,7 +35,9 @@ const Payments = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
-        <h1 className="text-2xl font-bold mb-4 text-center">Payments (&#8377; {amount})</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">
+          Payments (&#8377; {amount})
+        </h1>
         {loading && <p className="text-center text-gray-500">Loading...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && !error && payments.length === 0 && (
@@ -51,7 +53,7 @@ const Payments = () => {
                 <p className="text-lg font-semibold">
                   <strong>Transaction ID:</strong> {payment[1]}
                 </p>
-                <p className="text-lg font-semibold">
+                <p className="text-lg font-semibold bg-green-500 text-white p-2 rounded">
                   <strong>Amount:</strong> {payment[2]}
                 </p>
                 <p className="text-lg font-semibold">
