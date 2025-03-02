@@ -53,7 +53,7 @@ const Payments = () => {
                 <p className="text-lg font-semibold">
                   <strong>Transaction ID:</strong> {payment[1]}
                 </p>
-                <p className="text-lg font-semibold bg-green-500 text-white">
+                <p className="text-lg font-semibold bg-green-500">
                   <strong>Amount:</strong> {payment[2]}
                 </p>
                 <p className="text-lg font-semibold">
