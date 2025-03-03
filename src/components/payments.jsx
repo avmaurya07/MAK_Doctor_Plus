@@ -6,6 +6,7 @@ const Payments = () => {
   const [amount, setAmount] = useState("0.00");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [colo, setColo] = useState("white");
 
   const fetchPayments = async () => {
     setLoading(true);
@@ -20,6 +21,12 @@ const Payments = () => {
       const data = await response.json();
       setPayments(data.data || []); // Ensure empty state is handled
       setAmount(data.amount);
+      console.log(data.amount);
+      if(data.amount[0]==='-'){
+        setColo("green");
+      }else{
+        setColo("red");
+      }
     } catch (err) {
       setError("Failed to fetch payments");
       console.error("Error fetching payments:", err);
@@ -36,7 +43,7 @@ const Payments = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
         <h1 className="text-2xl font-bold mb-4 text-center">
-          Payments (&#8377; {amount})
+          Payments <p className={`bg-${colo}-500`}>(&#8377; {amount})</p>
         </h1>
         {loading && <p className="text-center text-gray-500">Loading...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
