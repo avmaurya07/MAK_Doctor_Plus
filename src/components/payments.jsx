@@ -20,10 +20,10 @@ const Payments = () => {
       });
       const data = await response.json();
       setPayments(data.data || []); // Ensure empty state is handled
-      setAmount(data.amount.slice(1));
       // console.log(data.amount);
       if(data.amount[0]==='-'){
         setColo("green");
+        setAmount(data.amount.slice(1));
       }else{
         setColo("red");
       }
