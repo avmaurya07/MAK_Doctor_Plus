@@ -26,6 +26,7 @@ const Payments = () => {
         setAmount(data.amount.slice(1));
       }else{
         setColo("red");
+        setAmount(data.amount);
       }
     } catch (err) {
       setError("Failed to fetch payments");
