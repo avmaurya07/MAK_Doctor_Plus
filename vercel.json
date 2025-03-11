@@ -7,6 +7,10 @@
     {
       "source": "/:path*",
       "destination": "/"
+    },
+    {
+      "source": "/pay_to_mak_azamgarh",
+      "destination": "upi://pay?pa=IMCPMT89504837@hdfcbank&pn=MAK%20AZAMGARH&tn=Payment%20to%20MAK%20AZAMGARH&cu=INR"
     }
   ],
   "redirects": [
