@@ -45,7 +45,7 @@ const Payments = () => {
 
   const shareQR = async () => {
     try {
-      const response = await fetch("https://raw.githubusercontent.com/avmaurya07/MAK_Doctor_Plus/refs/heads/main/public/QR.png");
+      const response = await fetch("https://raw.githubusercontent.com/avmaurya07/MAK_Doctor_Plus/refs/heads/main/public/upi_1741686549295.png");
       const blob = await response.blob();
       const file = new File([blob], "qr.png", { type: blob.type });
   
@@ -107,7 +107,7 @@ const Payments = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
             <h2 className="text-xl font-bold mb-4">QR Code</h2>
-            <img src="https://raw.githubusercontent.com/avmaurya07/MAK_Doctor_Plus/refs/heads/main/public/QR.png" alt="QR Code" className="w-full h-auto mb-4" />
+            <img src="https://raw.githubusercontent.com/avmaurya07/MAK_Doctor_Plus/refs/heads/main/public/upi_1741686549295.png" alt="QR Code" className="w-full h-auto mb-4" />
             <button
               onClick={shareQR}
               className="mb-2 px-4 py-2 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600"
