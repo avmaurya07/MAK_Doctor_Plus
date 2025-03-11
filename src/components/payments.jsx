@@ -7,6 +7,7 @@ const Payments = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [colo, setColo] = useState("white");
+  const [showQR, setShowQR] = useState(false);
 
   const fetchPayments = async () => {
     setLoading(true);
@@ -19,14 +20,14 @@ const Payments = () => {
         },
       });
       const data = await response.json();
-      setPayments(data.data || []); 
-      if(data.amount==='NaN'){
+      setPayments(data.data || []);
+      if (data.amount === "NaN") {
         window.location.reload();
       }
-      if(data.amount[0]==='-'){
+      if (data.amount[0] === "-") {
         setColo("green");
         setAmount(data.amount.slice(1));
-      }else{
+      } else {
         setColo("red");
         setAmount(data.amount);
       }
@@ -42,12 +43,30 @@ const Payments = () => {
     fetchPayments();
   }, []);
 
+  const shareQR = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: "QR Code",
+        text: "Scan this QR code for payment.",
+        url: window.location.origin + "/qr.png",
+      }).catch((error) => console.error("Error sharing:", error));
+    } else {
+      alert("Sharing not supported on this browser.");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
-        <h1 className="text-2xl font-bold mb-4 text-center">
-          Payments <p className={`bg-${colo}-500`}>(&#8377; {amount})</p>
-        </h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">Payments <span className={`bg-${colo}-500 px-2 py-1 rounded text-white`}>(₹ {amount})</span></h1>
+          <button
+            onClick={() => setShowQR(true)}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
+          >
+            QR
+          </button>
+        </div>
         {loading && <p className="text-center text-gray-500">Loading...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && !error && payments.length === 0 && (
@@ -74,6 +93,27 @@ const Payments = () => {
           </ul>
         )}
       </div>
+
+      {showQR && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+            <h2 className="text-xl font-bold mb-4">QR Code</h2>
+            <img src="/qr.png" alt="QR Code" className="w-full h-auto mb-4" />
+            <button
+              onClick={shareQR}
+              className="mb-2 px-4 py-2 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600"
+            >
+              Share
+            </button>
+            <button
+              onClick={() => setShowQR(false)}
+              className="px-4 py-2 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
