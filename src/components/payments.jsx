@@ -20,9 +20,9 @@ const Payments = () => {
       });
       const data = await response.json();
       setPayments(data.data || []); 
-      // if(data.amount==='NaN'){
-      //   window.location.reload();
-      // }
+      if(data.amount==='NaN'){
+        window.location.reload();
+      }
       if(data.amount[0]==='-'){
         setColo("green");
         setAmount(data.amount.slice(1));
