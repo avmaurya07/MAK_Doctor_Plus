@@ -43,17 +43,26 @@ const Payments = () => {
     fetchPayments();
   }, []);
 
-  const shareQR = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: "QR Code",
-        text: "Scan this QR code for payment.",
-        url: window.location.origin + "/qr.png",
-      }).catch((error) => console.error("Error sharing:", error));
-    } else {
-      alert("Sharing not supported on this browser.");
+  const shareQR = async () => {
+    try {
+      const response = await fetch("https://raw.githubusercontent.com/avmaurya07/MAK_Doctor_Plus/refs/heads/main/public/QR.png");
+      const blob = await response.blob();
+      const file = new File([blob], "qr.png", { type: blob.type });
+  
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          title: "QR Code",
+          text: "Scan this QR code for payment.",
+          files: [file],
+        }).catch((error) => console.error("Error sharing:", error));
+      } else {
+        alert("Sharing files is not supported on this browser.");
+      }
+    } catch (error) {
+      console.error("Error fetching QR code image:", error);
+      alert("Failed to load QR code for sharing.");
     }
-  };
+  };  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
