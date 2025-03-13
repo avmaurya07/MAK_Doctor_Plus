@@ -109,7 +109,7 @@ const Dashboard = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
               </svg>
             </li>}
-           {(userData.userId==='admin') && <li 
+           {(userData.userId==='admin' || userData.userId==='300069') && <li 
               onClick={handlepayment} 
               className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
             >
