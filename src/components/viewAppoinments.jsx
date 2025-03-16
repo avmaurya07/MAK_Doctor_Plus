@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import config from "../config";
 import Switch from 'react-switch';
 import EmergencyModal from './EmergencyModal';
+import  {openMedicalReport}  from "./printReport";
 
 const ViewAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -257,7 +258,7 @@ const handleDateChange = (e) => {
                         <label className="ml-2">Exercise Fee (&#8377;100)</label>
                       </div>*/}
                       <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-1"
                         onClick={() => handleSave(appointment)}
                         disabled={!isFutureOrToday}
                       >
@@ -265,12 +266,22 @@ const handleDateChange = (e) => {
                       </button>
                       {appointment.feePaid && appointment.dateOfAppoinment === today && (
                         <button
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded hidden md:inline-block"
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded hidden md:inline-block"
                           onClick={() => handlePrint(appointment)}
                         >
                           Print
                         </button>
                       )}
+                                 {appointment.report ? (
+                  <button 
+                    className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded hidden md:inline-block"
+                    onClick={() => openMedicalReport(appointment.report,appointment.DoctorName)}
+                  >
+                    Print Report
+                  </button>
+                ) : (
+                  <p className="text-red-600 font-bold">Report not uploaded yet</p>
+                )}
                     </>
                   )}
                 </li>

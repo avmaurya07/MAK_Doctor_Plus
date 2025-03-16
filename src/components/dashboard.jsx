@@ -46,6 +46,9 @@ const Dashboard = () => {
   const handleViewAppointments = () => {
     navigate('/view-appointments');
   };
+  const handleUploadReport = () => {
+    navigate('/reports');
+  };
 
   const handleScanQR = () => {
     navigate('/QRScanner');
@@ -139,7 +142,7 @@ const Dashboard = () => {
               </svg>
             </li>
           )}
-          {(userData.userId !== '300069-gullan') && <li 
+          {(userData.userId === '300069' || userData.userId==="admin") && <li 
             onClick={handleViewAppointments} 
             className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
           >
@@ -148,7 +151,16 @@ const Dashboard = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
           </li>}
-          {(userData.userId==='300069' || userData.userId==='300069-gullan') && <li 
+          {(userData.userType === 'mak_doctor') && <li 
+            onClick={handleUploadReport} 
+            className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
+          >
+            Upload Report
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </li>}
+          <li 
             onClick={handleChangePassword} 
             className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
           >
@@ -156,7 +168,7 @@ const Dashboard = () => {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
-          </li>}
+          </li>
         </ul>
       </div>
     </div>
