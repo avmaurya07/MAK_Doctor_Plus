@@ -1,21 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import config from "../config";
-import Switch from 'react-switch';
-import EmergencyModal from './EmergencyModal';
-import  {openMedicalReport}  from "./printReport";
+import Switch from "react-switch";
+import EmergencyModal from "./EmergencyModal";
+import { openMedicalReport } from "./printReport";
 
 const ViewAppointments = () => {
   const [appointments, setAppointments] = useState([]);
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')) || {});
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("userData")) || {}
+  );
   const [printData, setPrintData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(() => {
-    return new Date().toLocaleDateString('en-IN', { 
-      timeZone: 'Asia/Kolkata', 
-      year: 'numeric', 
-      month: '2-digit', 
-      day: '2-digit' 
-    }).split('/').reverse().join('-')
+    return new Date()
+      .toLocaleDateString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .split("/")
+      .reverse()
+      .join("-");
   });
   const [isAttended, setIsAttended] = useState(false);
   const printRef = useRef(null);
@@ -23,15 +29,18 @@ const ViewAppointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch(`${config.baseURL}patients/${userData.mak}a${selectedDate}?dateOfAppoinment=${selectedDate}`, {
-          headers: {
-            'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
-          },
-        });
+        const response = await fetch(
+          `${config.baseURL}patients/${userData.mak}a${selectedDate}?dateOfAppoinment=${selectedDate}`,
+          {
+            headers: {
+              Authorization: `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`,
+            },
+          }
+        );
         const data = await response.json();
         setAppointments(data.data);
       } catch (error) {
-        console.error('Error fetching appointments:', error);
+        console.error("Error fetching appointments:", error);
       }
     };
 
@@ -39,15 +48,15 @@ const ViewAppointments = () => {
   }, [1]);
 
   useEffect(() => {
-    const userData1 = JSON.parse(localStorage.getItem('userData'));
+    const userData1 = JSON.parse(localStorage.getItem("userData"));
     if (userData1 && userData1.userId) {
       setUserData(userData1);
     }
   }, [1]);
 
   const handleSwitchChange = (id, field, value) => {
-    setAppointments(prevAppointments =>
-      prevAppointments.map(appointment =>
+    setAppointments((prevAppointments) =>
+      prevAppointments.map((appointment) =>
         appointment.id === id ? { ...appointment, [field]: value } : appointment
       )
     );
@@ -55,50 +64,64 @@ const ViewAppointments = () => {
 
   const handleSave = async (appointment) => {
     try {
-      const response = await fetch(`${config.baseURL}patients/${appointment.documentId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
-        },
-        body: JSON.stringify({data:{
-          feePaid:appointment.feePaid,
-          exercise:appointment.exercise}})
-      });
+      const response = await fetch(
+        `${config.baseURL}patients/${appointment.documentId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`,
+          },
+          body: JSON.stringify({
+            data: {
+              feePaid: appointment.feePaid,
+              exercise: appointment.exercise,
+            },
+          }),
+        }
+      );
       if (!response.ok) {
-        throw new Error('Failed to save appointment');
+        throw new Error("Failed to save appointment");
       }
       const updatedAppointment = await response.json();
       // setAppointments(prevAppointments =>
       //   prevAppointments.map(a => (a.id === updatedAppointment.id ? updatedAppointment : a))
       // );
-      alert('Appointment saved successfully!');
+      alert("Appointment saved successfully!");
     } catch (error) {
-      console.error('Error saving appointment:', error);
+      console.error("Error saving appointment:", error);
     }
   };
 
   const handleSave2 = async (appointment) => {
     try {
-      const response = await fetch(`${config.baseURL}patients/${appointment.documentId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
-        },
-        body: JSON.stringify({data:{
-          feePaid:appointment.feePaid,
-          exercise:appointment.exercise}})
-      });
+      const response = await fetch(
+        `${config.baseURL}patients/${appointment.documentId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`,
+          },
+          body: JSON.stringify({
+            data: {
+              feePaid: appointment.feePaid,
+              exercise: appointment.exercise,
+            },
+          }),
+        }
+      );
       if (!response.ok) {
-        throw new Error('Failed to save appointment');
+        throw new Error("Failed to save appointment");
       }
       const updatedAppointment = await response.json();
-      setAppointments(prevAppointments =>
-        prevAppointments.map(a => (a.id === updatedAppointment.id ? updatedAppointment : a))
+      setAppointments((prevAppointments) =>
+        prevAppointments.map((a) =>
+          a.id === updatedAppointment.id ? updatedAppointment : a
+        )
       );
     } catch (error) {
-      console.error('Error saving appointment:', error);
+      console.error("Error saving appointment:", error);
     }
   };
 
@@ -106,70 +129,88 @@ const ViewAppointments = () => {
     try {
       setPrintData({
         documentId: appointment.documentId,
-        Name:appointment.Name,
-      phoneNumber:appointment.phoneNumber,
-      dateOfAppoinment:appointment.dateOfAppoinment.split('-').reverse().join('/'),
-      DoctorName:appointment.DoctorName,
-      age:appointment.age,
-      gender:appointment.gender
+        Name: appointment.Name,
+        phoneNumber: appointment.phoneNumber,
+        dateOfAppoinment: appointment.dateOfAppoinment
+          .split("-")
+          .reverse()
+          .join("/"),
+        DoctorName: appointment.DoctorName,
+        age: appointment.age,
+        gender: appointment.gender,
       });
       await handleSave2(appointment);
       const printContent = printRef.current.innerHTML;
-      const printWindow = window.open('', '', 'height=100%,width=800');
-      printWindow.document.write('<html><head><title>Print Appointment</title>');
-      printWindow.document.write('</head><body >');
+      const printWindow = window.open("", "", "height=100%,width=800");
+      printWindow.document.write(
+        "<html><head><title>Print Appointment</title>"
+      );
+      printWindow.document.write("</head><body >");
       printWindow.document.write(printContent);
-      printWindow.document.write('</body></html>');
+      printWindow.document.write("</body></html>");
       printWindow.document.close();
       printWindow.print();
-      
-      printWindow.addEventListener('afterprint', () => {
+
+      printWindow.addEventListener("afterprint", () => {
         printWindow.close();
       });
       setTimeout(() => {
         printWindow.close();
       }, 1000);
     } catch (error) {
-      console.error('Error saving appointment before printing:', error);
+      console.error("Error saving appointment before printing:", error);
     }
   };
 
-  const filteredAppointments = appointments.filter(appointment => {
+  const filteredAppointments = appointments.filter((appointment) => {
     const dateOfAppoinment = new Date(appointment.dateOfAppoinment);
     const selectedDateObj = new Date(selectedDate);
-    return dateOfAppoinment.toDateString() === selectedDateObj.toDateString() ;
+    return dateOfAppoinment.toDateString() === selectedDateObj.toDateString();
   });
 
-  const filteredAppointmentsByUserType = userData.userType === 'mak_doctor'
-    ? filteredAppointments.filter(appointment => (appointment.feePaid || appointment.exercise) && appointment.visitedToDoctor === isAttended && appointment.DoctorName === userData.Name)
-    : filteredAppointments;
+  const filteredAppointmentsByUserType =
+    userData.userType === "mak_doctor"
+      ? filteredAppointments.filter(
+          (appointment) =>
+            (appointment.feePaid || appointment.exercise) &&
+            appointment.visitedToDoctor === isAttended &&
+            appointment.DoctorName === userData.Name
+        )
+      : filteredAppointments;
 
-  const today = new Date().toLocaleDateString('en-IN', { 
-    timeZone: 'Asia/Kolkata', 
-    year: 'numeric', 
-    month: '2-digit', 
-    day: '2-digit' 
-  }).split('/').reverse().join('-')
+  const today = new Date()
+    .toLocaleDateString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .split("/")
+    .reverse()
+    .join("-");
 
-const handleDateChange = (e) => {
-  setSelectedDate(e.target.value);
-  setAppointments([]);
-  setIsAttended(false);
-  const fetchAppointments = async () => {
-    try {
-      const response = await fetch(`${config.baseURL}patients/${userData.mak}a${selectedDate}?dateOfAppoinment=${e.target.value}`, {
-        headers: {
-          'Authorization': `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`
-        }
-      });
-      const data = await response.json();
-      setAppointments(data.data);
-    } catch (error) {
-      console.error('Error fetching appointments:', error);
-    }
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+    setAppointments([]);
+    setIsAttended(false);
+    const fetchAppointments = async () => {
+      try {
+        const response = await fetch(
+          `${config.baseURL}patients/${userData.mak}a${selectedDate}?dateOfAppoinment=${e.target.value}`,
+          {
+            headers: {
+              Authorization: `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setAppointments(data.data);
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    };
+    fetchAppointments();
   };
-  fetchAppointments();
-}
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -184,51 +225,82 @@ const handleDateChange = (e) => {
             onChange={(e) => handleDateChange(e)}
             className="p-2 border border-gray-300 rounded"
           />
-                    <button 
-                      onClick={() => setIsModalOpen(true)} 
-                      className="bg-red-500 text-white font-bold py-2 px-4 rounded m-2 hover:bg-red-700"
-                    >
-                      Emergency Sewa
-                    </button>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-red-500 text-white font-bold py-2 px-4 rounded m-2 hover:bg-red-700 hidden md:inline-block"
+          >
+            Emergency Sewa
+          </button>
 
-          {(userData.userType === 'mak_doctor') && <div className="ml-4 flex items-center">
-            <Switch
-              onChange={setIsAttended}
-              checked={isAttended}
-              onColor="#00FF00"
-              offColor="#FF0000"
-              uncheckedIcon={false}
-              checkedIcon={false}
-              handleDiameter={28}
-              height={20}
-              width={50}
-            />
-            <label className="ml-2">Attended</label>
-          </div>}
+          {userData.userType === "mak_doctor" && (
+            <div className="ml-4 flex items-center">
+              <Switch
+                onChange={setIsAttended}
+                checked={isAttended}
+                onColor="#00FF00"
+                offColor="#FF0000"
+                uncheckedIcon={false}
+                checkedIcon={false}
+                handleDiameter={28}
+                height={20}
+                width={50}
+              />
+              <label className="ml-2">Attended</label>
+            </div>
+          )}
         </div>
-       
+
         {filteredAppointmentsByUserType.length === 0 ? (
           <p className="text-center">No appointments found.</p>
         ) : (
           <ul>
             {filteredAppointmentsByUserType.map((appointment) => {
-              const isFutureOrToday = new Date(appointment.dateOfAppoinment) >= new Date(today);
+              const isFutureOrToday =
+                new Date(appointment.dateOfAppoinment) >= new Date(today);
               return (
-                <li key={appointment.id} className="mb-4 p-4 border border-gray-300 rounded">
-                  <p><strong>Name:</strong> {appointment.Name}</p>
-                  <p><strong>Phone Number:</strong> {appointment.phoneNumber}</p>
-                  <p><strong>Appointment Date:</strong> {(appointment.dateOfAppoinment.split('-').reverse().join('/'))}</p>
-                  <p><strong>Doctor:</strong> {appointment.DoctorName}</p>
-                  {((userData.userType === 'mak_doctor') || (userData.userId === '300069-gullan')) ? (
+                <li
+                  key={appointment.id}
+                  className="mb-4 p-4 border border-gray-300 rounded"
+                >
+                  <p>
+                    <strong>Name:</strong> {appointment.Name}
+                  </p>
+                  <p>
+                    <strong>Phone Number:</strong> {appointment.phoneNumber}
+                  </p>
+                  <p>
+                    <strong>Appointment Date:</strong>{" "}
+                    {appointment.dateOfAppoinment
+                      .split("-")
+                      .reverse()
+                      .join("/")}
+                  </p>
+                  <p>
+                    <strong>Doctor:</strong> {appointment.DoctorName}
+                  </p>
+                  {userData.userType === "mak_doctor" ||
+                  userData.userId === "300069-gullan" ? (
                     <>
-                      <p><strong>Doctor Fee:</strong> {appointment.feePaid ? 'Yes' : 'No'}</p>
-                      <p><strong>Exercise Fee:</strong> {appointment.exercise ? 'Yes' : 'No'}</p>
+                      <p>
+                        <strong>Doctor Fee:</strong>{" "}
+                        {appointment.feePaid ? "Yes" : "No"}
+                      </p>
+                      <p>
+                        <strong>Exercise Fee:</strong>{" "}
+                        {appointment.exercise ? "Yes" : "No"}
+                      </p>
                     </>
                   ) : (
                     <>
                       <div className="flex items-center mb-4">
                         <Switch
-                          onChange={(checked) => handleSwitchChange(appointment.id, 'feePaid', checked)}
+                          onChange={(checked) =>
+                            handleSwitchChange(
+                              appointment.id,
+                              "feePaid",
+                              checked
+                            )
+                          }
                           checked={appointment.feePaid}
                           onColor="#00FF00"
                           offColor="#FF0000"
@@ -241,7 +313,7 @@ const handleDateChange = (e) => {
                         />
                         <label className="ml-2">Doctor Fee (&#8377;200)</label>
                       </div>
-                     {/* <div className="flex items-center mb-4">
+                      {/* <div className="flex items-center mb-4">
                         <Switch
                           onChange={(checked) => handleSwitchChange(appointment.id, 'exercise', checked)}
                           checked={appointment.exercise}
@@ -264,24 +336,32 @@ const handleDateChange = (e) => {
                       >
                         Save
                       </button>
-                      {appointment.feePaid && appointment.dateOfAppoinment === today && (
+                      {appointment.feePaid &&
+                        appointment.dateOfAppoinment === today && (
+                          <button
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded hidden md:inline-block"
+                            onClick={() => handlePrint(appointment)}
+                          >
+                            Print
+                          </button>
+                        )}
+                      {appointment.report ? (
                         <button
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded hidden md:inline-block"
-                          onClick={() => handlePrint(appointment)}
+                          className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded hidden md:inline-block"
+                          onClick={() =>
+                            openMedicalReport(
+                              appointment.report,
+                              appointment.DoctorName
+                            )
+                          }
                         >
-                          Print
+                          Print Report
                         </button>
+                      ) : (
+                        <p className="text-red-600 font-bold">
+                          Report not uploaded yet
+                        </p>
                       )}
-                                 {appointment.report ? (
-                  <button 
-                    className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded hidden md:inline-block"
-                    onClick={() => openMedicalReport(appointment.report,appointment.DoctorName)}
-                  >
-                    Print Report
-                  </button>
-                ) : (
-                  <p className="text-red-600 font-bold">Report not uploaded yet</p>
-                )}
                     </>
                   )}
                 </li>
@@ -290,97 +370,145 @@ const handleDateChange = (e) => {
           </ul>
         )}
       </div>
-      <div 
-              ref={printRef} 
-              hidden 
-              className="prescription-template" 
-              style={{ 
-                fontFamily: 'Arial, sans-serif', 
-                padding: '20px', 
-                border: '1px solid #000', 
-                width: '600px', 
-                height: '800px', 
-                position: 'relative', 
-                boxSizing: 'border-box'
-              }}
-            >
+      <div
+        ref={printRef}
+        hidden
+        className="prescription-template"
+        style={{
+          fontFamily: "Arial, sans-serif",
+          padding: "20px",
+          border: "1px solid #000",
+          width: "600px",
+          height: "800px",
+          position: "relative",
+          boxSizing: "border-box",
+        }}
+      >
         {/* Header Section */}
-        <div style={{ position: 'relative', marginBottom: '20px' }}>
-          <img 
-            src="https://imcbusiness.com/images/logo.png" 
-            alt="Mega Ayurvedic Kendra Logo" 
-            style={{ position: 'absolute', top: '1px', left: '20px', height: '120px' }} 
+        <div style={{ position: "relative", marginBottom: "20px" }}>
+          <img
+            src="https://imcbusiness.com/images/logo.png"
+            alt="Mega Ayurvedic Kendra Logo"
+            style={{
+              position: "absolute",
+              top: "1px",
+              left: "20px",
+              height: "120px",
+            }}
           />
-          <div style={{ textAlign: 'center', marginTop: '0px' }}>
-            <h1 style={{ margin: 0, fontSize: '36px', color: '#007540' }}>Mega Ayurvedic Kendra</h1>
-            <p style={{ margin: 0, fontSize: '21px' }}>Roadways to Bhawarnath Bypass Road, 500 mtr from Roadways,<br /> Azamgarh, Uttar Pradesh - 276001</p>
-            <p style={{ margin: 0, fontSize: '21px' }}>Phone: +91 9554242552 | Email: imc.azamgarh@gmail.com</p>
+          <div style={{ textAlign: "center", marginTop: "0px" }}>
+            <h1 style={{ margin: 0, fontSize: "36px", color: "#007540" }}>
+              Mega Ayurvedic Kendra
+            </h1>
+            <p style={{ margin: 0, fontSize: "21px" }}>
+              Roadways to Bhawarnath Bypass Road, 500 mtr from Roadways,
+              <br /> Azamgarh, Uttar Pradesh - 276001
+            </p>
+            <p style={{ margin: 0, fontSize: "21px" }}>
+              Phone: +91 9554242552 | Email: imc.azamgarh@gmail.com
+            </p>
           </div>
-          <div style={{ position: 'absolute', top: '1px', right: '20px' }}>
-            <img 
-              src={`https://api.qrserver.com/v1/create-qr-code/?data=${printData.documentId}&size=100x100`} 
-              alt="QR Code" 
-              style={{ height: '120px', width: '120px' }} 
+          <div style={{ position: "absolute", top: "1px", right: "20px" }}>
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?data=${printData.documentId}&size=100x100`}
+              alt="QR Code"
+              style={{ height: "120px", width: "120px" }}
             />
           </div>
         </div>
 
         {/* Patient Info Section */}
-        <div style={{ borderTop: '2px solid #007540', marginTop: '10px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', lineHeight: '0.3' }}>
-            <p style={{ fontSize: '1.5em' }}><strong>Patient:</strong> {printData.Name}</p>
-            <p style={{ fontSize: '1.5em' }}><strong>Phone No:</strong> {printData.phoneNumber}</p>
-            <p style={{ fontSize: '1.5em' }}><strong>Date:</strong> {printData.dateOfAppoinment}</p>
+        <div style={{ borderTop: "2px solid #007540", marginTop: "10px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "5px",
+              lineHeight: "0.3",
+            }}
+          >
+            <p style={{ fontSize: "1.5em" }}>
+              <strong>Patient:</strong> {printData.Name}
+            </p>
+            <p style={{ fontSize: "1.5em" }}>
+              <strong>Phone No:</strong> {printData.phoneNumber}
+            </p>
+            <p style={{ fontSize: "1.5em" }}>
+              <strong>Date:</strong> {printData.dateOfAppoinment}
+            </p>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', lineHeight: '0.3' }}>
-            <p style={{ fontSize: '1.5em' }}><strong>Doctor:</strong> {printData.DoctorName}</p>
-            <p style={{ fontSize: '1.5em' }}><strong>Age:</strong> {printData.age}</p>
-            <p style={{ fontSize: '1.5em' }}><strong>Gender:</strong> {printData.gender}</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "5px",
+              lineHeight: "0.3",
+            }}
+          >
+            <p style={{ fontSize: "1.5em" }}>
+              <strong>Doctor:</strong> {printData.DoctorName}
+            </p>
+            <p style={{ fontSize: "1.5em" }}>
+              <strong>Age:</strong> {printData.age}
+            </p>
+            <p style={{ fontSize: "1.5em" }}>
+              <strong>Gender:</strong> {printData.gender}
+            </p>
           </div>
         </div>
         {/* Prescription Section */}
-        <div style={{ borderTop: '2px solid #007540', marginTop: '10px', paddingTop: '10px' }}>
-          <h2 style={{ fontSize: '27px', marginBottom: '10px' }}>Prescription:</h2>
+        <div
+          style={{
+            borderTop: "2px solid #007540",
+            marginTop: "10px",
+            paddingTop: "10px",
+          }}
+        >
+          <h2 style={{ fontSize: "27px", marginBottom: "10px" }}>
+            Prescription:
+          </h2>
         </div>
 
         {/* Footer Section */}
-        <div 
-          style={{ 
-            position: 'absolute', 
-            bottom: '30px', 
-            left: '20px', 
-            right: '20px', 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            borderTop: '2px solid #007540', 
-            paddingTop: '10px' 
+        <div
+          style={{
+            position: "absolute",
+            bottom: "30px",
+            left: "20px",
+            right: "20px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderTop: "2px solid #007540",
+            paddingTop: "10px",
           }}
         >
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '14px', margin: '0 0 10px' }}></p>
+          <div style={{ textAlign: "center" }}>
+            <p style={{ fontSize: "14px", margin: "0 0 10px" }}></p>
           </div>
         </div>
 
         {/* Disclaimer */}
-        <p 
-          style={{ 
-            position: 'absolute', 
-            bottom: '1px', 
-            left: '20px', 
-            right: '20px', 
-            fontSize: '15px', // Increased from 12px to 18px
-            textAlign: 'center', 
-            color: '#777' 
+        <p
+          style={{
+            position: "absolute",
+            bottom: "1px",
+            left: "20px",
+            right: "20px",
+            fontSize: "15px", // Increased from 12px to 18px
+            textAlign: "center",
+            color: "#777",
           }}
         >
-          <strong>Disclaimer:</strong> This is not an official document. The prescription is issued for informational purposes only and should not be treated as a legally binding medical record.
+          <strong>Disclaimer:</strong> This is not an official document. The
+          prescription is issued for informational purposes only and should not
+          be treated as a legally binding medical record.
         </p>
       </div>
 
       {/* Add this CSS */}
       <style>
-              {`
+        {`
                 @media print {
                   @page {
                     margin: 5px 0;
@@ -394,9 +522,11 @@ const handleDateChange = (e) => {
                   }
                 }
               `}
-            </style>
-            <EmergencyModal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
-
+      </style>
+      <EmergencyModal
+        isModalOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
