@@ -18,6 +18,7 @@ import QRScanner from './components/QRScanner.jsx';
 import PhoneCall from './components/phoneCall.jsx';
 import Payment from './components/payments.jsx';
 import AddReport from './components/addReport.jsx';
+import SCMLogin from './components/ScmLogin.jsx';
 
 
 const Layout = ({ children }) => {
@@ -49,6 +50,7 @@ const App = () => {
                     <Route path="/users" element={<Users />} />
                     <Route path="/payments" element={<Payment />} />
                     <Route path="/reports" element={<AddReport />} />
+                    <Route path="/SCMLogin" element={<SCMLogin />} />
                     <Route path="/" element={userData ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
                 </Routes>
             </Layout>

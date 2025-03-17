@@ -49,6 +49,9 @@ const Dashboard = () => {
   const handleUploadReport = () => {
     navigate('/reports');
   };
+  const handleSCMLogin = () => {
+    navigate('/SCMLogin');
+  };
 
   const handleScanQR = () => {
     navigate('/QRScanner');
@@ -96,6 +99,15 @@ const Dashboard = () => {
               className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
             >
               View Users
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </li>
+            <li 
+              onClick={handleSCMLogin} 
+              className="cursor-pointer p-4 bg-white text-black rounded flex justify-between items-center hover:bg-gray-200 border border-gray-300"
+            >
+              SCM Login
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
               </svg>
