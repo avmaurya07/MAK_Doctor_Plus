@@ -203,7 +203,7 @@ const ViewAppointments = () => {
         throw new Error("Failed to delete appointment");
       }
       const data = await response.json();
-      console.log("Appointment deleted successfully:", data);
+      // console.log("Appointment deleted successfully:", data);
       setAppointments((prevAppointments) =>
         prevAppointments.filter((appointment) => appointment.id !== id)
       );
@@ -387,7 +387,7 @@ const ViewAppointments = () => {
                       )}
                       {userData.userId === "admin" && (
                         <button
-                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-1 rounded hidden md:inline-block"
+                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-1 rounded"
                           onClick={() => deletePatient(appointment.id)}
                         >
                           Delete Patient
