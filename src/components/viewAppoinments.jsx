@@ -188,7 +188,30 @@ const ViewAppointments = () => {
     .split("/")
     .reverse()
     .join("-");
-
+  const deletePatient = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this appointment?")) {
+      return;
+    }
+    try {
+      const response = await fetch(`${config.baseURL}patients/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${config.EXPO_PUBLIC_STRAPI_API_KEY}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete appointment");
+      }
+      const data = await response.json();
+      console.log("Appointment deleted successfully:", data);
+      setAppointments((prevAppointments) =>
+        prevAppointments.filter((appointment) => appointment.id !== id)
+      );
+      alert("Appointment deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting appointment:", error);
+    }
+  };
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
     setAppointments([]);
@@ -361,6 +384,14 @@ const ViewAppointments = () => {
                         <p className="text-red-600 font-bold">
                           Report not uploaded yet
                         </p>
+                      )}
+                      {userData.userId === "admin" && (
+                        <button
+                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-1 rounded hidden md:inline-block"
+                          onClick={() => deletePatient(appointment.id)}
+                        >
+                          Delete Patient
+                        </button>
                       )}
                     </>
                   )}
